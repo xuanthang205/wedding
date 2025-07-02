@@ -12,7 +12,6 @@ const lightbox = GLightbox({
 
 const swiper = new Swiper(".mySwiper", {
     effect: "coverflow",
-    spaceBetween: 50,
     grabCursor: true,
     centeredSlides: true,
     slidesPerView: "auto",
@@ -34,10 +33,10 @@ const swiper = new Swiper(".mySwiper", {
     },
     breakpoints: {
         0: {
-            spaceBetween: 30,
+            spaceBetween: 36,
         },
         769: {
-            spaceBetween: 50,
+            spaceBetween: 60,
         },
     },
 });
@@ -66,4 +65,24 @@ dimmed.addEventListener("click", () => {
     dimmed.classList.remove("is_active");
     popup.classList.remove("is_active");
     document.body.style.overflow = "";
+});
+
+const audio = document.getElementById('audio');
+const btn   = document.querySelector('.btn_play');
+
+btn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    btn.classList.add('playing');
+  } else {
+    audio.pause();
+    btn.classList.remove('playing');
+  }
+});
+
+// Khi audio kết thúc, tự động play lại và giữ class .playing
+audio.addEventListener('ended', () => {
+  audio.currentTime = 0;      // quay về đầu (tuỳ chọn)
+  audio.play();               // play lại
+  btn.classList.add('playing');
 });
